@@ -147,6 +147,49 @@ const createGrid = (gridSize=16) => {
 
 };
 
+const isNumberLessThanOrEqual100 = (value) => {
+    
+   var isValidNumber = !isNaN(parseInt(value)) && value <= 100 ? true : false;
+   return isValidNumber;
+
+    
+
+
+};
+
+const clearGrid = () => {
+
+    const grid_container = document.querySelector(".grid-container");
+
+    while (grid_container.firstChild) {
+        grid_container.removeChild(grid_container.firstChild);
+    }
+
+
+};
+
+const generateNewGrid = () => {
+
+    let grid_size = prompt("Please enter the number of squares per side for the new grid!");
+
+    
+
+    isNumberLessThanOrEqual100(grid_size) ? (console.log("yes"),
+                                            clearGrid(),
+                                            createGrid(grid_size),
+                                            initializeGridSquares())
+                                            //Creat New Grid
+                                            //Initialize Grid Squares
+                                         : 
+
+                                            generateNewGrid();
+
+
+
+
+
+};
+
 
 
         

@@ -19,3 +19,8 @@ body{
     flex-wrap: wrap;
 }
 
+button.change_grid {
+
+    margin: 20px 0;
+    padding: 20px;
+}
