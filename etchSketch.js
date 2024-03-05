@@ -14,10 +14,88 @@ const createGridItem = (width_of_grid_items) => {
 
     grid_item_style.width = width_of_grid_items;
 
-    grid_item.dataset.brightness= 100;
+    
 
     return grid_item;
 
+
+};
+
+const initializeGridSquares = () => {
+
+    var grid_squares = document.querySelectorAll(".grid_item");
+
+    grid_squares.forEach((grid_square) => {
+
+        grid_square.dataset.brightness = 100;
+
+        grid_square.dataset.originalColor = "";
+
+        let original_color = grid_square.dataset.originalColor;
+
+    
+    
+    
+    
+         grid_square.addEventListener("mouseover", (e) => {
+
+            const hovered_item = e.target;
+
+            if (hovered_item.dataset.originalColor === ""){
+
+                    new_color = getRandomColor();    
+
+                    hovered_item.style.backgroundColor = new_color;
+
+                    hovered_item.dataset.originalColor = new_color;
+
+                    original_color = new_color;
+             } else {
+
+                     darkenColor(hovered_item, original_color);
+             };
+
+           
+    });
+});   
+
+
+
+
+};
+
+const darkenColor = (hovered_item, original_color) => {
+
+       
+
+        let original_color_values = original_color.match(/\d+/g)
+
+        
+
+        
+
+        currentBrightness = hovered_item.dataset.brightness;
+
+        currentBrightness -= 10;
+
+        
+
+        currentBrightness < 0 ? currentBrightness = 0 : currentBrightness;
+
+        hovered_item.dataset.brightness = currentBrightness;
+        console.log(currentBrightness);
+
+        let new_color_values = original_color_values.map((color_value) => Math.floor(color_value * (currentBrightness / 100)));
+
+        console.log(new_color_values);
+
+        let new_color = `rgb(${new_color_values.join(", ")})`;
+
+        console.log(new_color);
+
+        hovered_item.style.backgroundColor = new_color;
+
+        
 
 };
 
@@ -67,7 +145,9 @@ const createGrid = (gridSize=16) => {
             
 
 
-    };
+};
+
+
 
         
 
@@ -75,20 +155,9 @@ const createGrid = (gridSize=16) => {
 
 createGrid();
 
-var grid_squares = document.querySelectorAll(".grid_item");
+initializeGridSquares();
 
-grid_squares.forEach((grid_square) => {
-    
-    grid_square.addEventListener("mouseover", (e) => {
 
-    const hovered_item = e.target;
-       
-           
-    hovered_item.style.backgroundColor = getRandomColor();
-
-           
-    });
-});   
 
 
 
